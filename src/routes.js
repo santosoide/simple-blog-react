@@ -54,7 +54,7 @@ export default store => {
       <Route path="survey" component={Survey} />
       <Route path="widgets" component={Widgets} />
       <Route path="chat" component={Chat} />
-      <Route path="blogs" component={Blogs} />
+      <Route path="blog" component={Blogs} />
       <Route path="blog/:slug" component={Blog} />
 
       {/* Catch all route */}
