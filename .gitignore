@@ -8,3 +8,4 @@ webpack-stats.json
 npm-debug.log
 .happypack
 webpack/dlls/*.json
+api/**/*.nedb

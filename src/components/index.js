@@ -17,3 +17,4 @@ export SurveyForm from './SurveyForm/SurveyForm';
 export WidgetForm from './WidgetForm/WidgetForm';
 export BlogList from './BlogList/BlogList';
 export BlogDetail from './BlogDetail/BlogDetail';
+export BlogCreateForm from './BlogCreateForm/BlogCreateForm';
