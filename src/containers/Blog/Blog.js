@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as blogActions from 'redux/modules/blogs';
 import { asyncConnect } from 'redux-connect';
 import { BlogDetail } from 'components';
+import { Link } from 'react-router';
 
 const { isLoaded, loadDetail: loadDetailBlogs } = blogActions;
 
@@ -18,13 +19,15 @@ const { isLoaded, loadDetail: loadDetailBlogs } = blogActions;
 @connect(
   state => ({
     blog: state.blogs.detail,
-    loadDetail: PropTypes.func.isRequired
+    loadDetail: PropTypes.func.isRequired,
+    user: state.auth.user
   }),
   { ...blogActions })
 export default class Blog extends Component {
   static propTypes = {
     blog: PropTypes.array,
     loadDetail: PropTypes.func.isRequired,
+    user: PropTypes.object,
     params: PropTypes.object
   };
 
@@ -32,11 +35,14 @@ export default class Blog extends Component {
     this.props.loadDetail(this.props.params.slug);
   }
   render() {
-    const { blog } = this.props;
+    const { blog, user } = this.props;
     return (
       <div className="container">
         <div className="row">
-          <h3>{blog.title}</h3>
+          <h3>
+            {blog.title}{user && <Link className="btn btn-link" type="button" to={`blog/${blog._id}/edit`}>
+            Edit</Link>}
+          </h3>
           <Helmet title={blog.title} />
           <BlogDetail blog={blog} />
         </div>

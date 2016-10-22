@@ -5,10 +5,15 @@ const BlogList = ({ blog, user }) => (
   <div>
     <div className="media well">
       <div className="media-body">
-        <h4 className="media-heading"><strong><Link to={`blog/${blog.slug}`}>{blog.title}</Link></strong></h4>
+        <h4 className="media-heading">
+          <strong>
+            <Link to={`blog/${blog.slug}`}>{blog.title}</Link>
+          </strong>
+          {' '}
+          {user && <Link className="btn btn-link btn-xs" type="button" to={`blog/${blog._id}/edit`}>Edit</Link>}
+        </h4>
         {blog.body}
         <br />
-        {user && <Link to={`blog/${blog._id}/edit`}>Edit</Link>}
       </div>
     </div>
   </div>
