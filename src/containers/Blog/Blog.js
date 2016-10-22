@@ -21,7 +21,7 @@ const { isLoaded, loadDetail: loadDetailBlogs } = blogActions;
     loadDetail: PropTypes.func.isRequired
   }),
   { ...blogActions })
-export default class Blogs extends Component {
+export default class Blog extends Component {
   static propTypes = {
     blog: PropTypes.array,
     loadDetail: PropTypes.func.isRequired,
