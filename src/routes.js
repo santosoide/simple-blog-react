@@ -4,7 +4,7 @@ import { isLoaded as isAuthLoaded, load as loadAuth } from 'redux/modules/auth';
 import {
   App, Chat, ChatFeathers, Home, Widgets, About,
   Register, Login, LoginSuccess, Survey, NotFound,
-  Blogs, Blog
+  Blogs, Blog, BlogEdit, BlogCreate
 } from 'containers';
 
 export default store => {
@@ -41,6 +41,8 @@ export default store => {
       <Route onEnter={requireLogin}>
         <Route path="loginSuccess" component={LoginSuccess} />
         <Route path="chatFeathers" component={ChatFeathers} />
+        <Route path="blog/:_id/edit" component={BlogEdit} />
+        <Route path="blog/create" component={BlogCreate} />
       </Route>
 
       {/* Routes disallow login */}

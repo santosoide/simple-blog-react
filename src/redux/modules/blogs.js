@@ -6,9 +6,12 @@ const LOAD_DETAIL_SUCCESS = 'redux-example/blogs/LOAD_DETAIL_SUCCESS';
 const LOAD_DETAIL_FAIL = 'redux-example/blogs/LOAD_DETAIL_FAIL';
 const EDIT_START = 'redux-example/blogs/EDIT_START';
 const EDIT_STOP = 'redux-example/blogs/EDIT_STOP';
-const SAVE = 'redux-example/blogs/SAVE';
-const SAVE_SUCCESS = 'redux-example/blogs/SAVE_SUCCESS';
-const SAVE_FAIL = 'redux-example/blogs/SAVE_FAIL';
+const SAVE_BLOG = 'redux-example/blogs/SAVE_BLOG';
+const SAVE_BLOG_SUCCESS = 'redux-example/blogs/SAVE_BLOG_SUCCESS';
+const SAVE_BLOG_FAIL = 'redux-example/blogs/SAVE_BLOG_FAIL';
+const IS_SLUG_EXISTS = 'redux-example/blogs/IS_SLUG_EXISTS';
+const IS_SLUG_EXISTS_SUCCESS = 'redux-example/blogs/IS_SLUG_EXISTS_SUCCESS';
+const IS_SLUG_EXISTS_FAIL = 'redux-example/blogs/IS_SLUG_EXISTS_FAIL';
 
 const initialState = {
   loaded: false,
@@ -78,24 +81,14 @@ export default function reducer(state = initialState, action = {}) {
           [action.id]: false
         }
       };
-    case SAVE:
-      return state; // 'saving' flag handled by redux-form
-    case SAVE_SUCCESS:
-      const data = [...state.data];
-      data[action.result.id - 1] = action.result;
+    case SAVE_BLOG:
+      return state;
+    case SAVE_BLOG_SUCCESS:
       return {
         ...state,
-        data,
-        editing: {
-          ...state.editing,
-          [action.id]: false
-        },
-        saveError: {
-          ...state.saveError,
-          [action.id]: null
-        }
+        data: action.result
       };
-    case SAVE_FAIL:
+    case SAVE_BLOG_FAIL:
       return typeof action.error === 'string' ? {
         ...state,
         saveError: {
@@ -103,6 +96,23 @@ export default function reducer(state = initialState, action = {}) {
           [action.id]: action.error
         }
       } : state;
+    case IS_SLUG_EXISTS:
+      return {
+        ...state,
+        exist: true
+      };
+    case IS_SLUG_EXISTS_SUCCESS:
+      return {
+        ...state,
+        slug: action.result.data,
+        error: null
+      };
+    case IS_SLUG_EXISTS_FAIL:
+      return {
+        ...state,
+        slug: null,
+        error: typeof action.error === 'string' ? action.error : 'Error'
+      };
     default:
       return state;
   }
@@ -126,12 +136,11 @@ export function loadDetail(slug) {
   };
 }
 
-export function save(widget) {
+export function save(blog) {
   return {
-    types: [SAVE, SAVE_SUCCESS, SAVE_FAIL],
-    id: widget.id,
+    types: [SAVE_BLOG, SAVE_BLOG_SUCCESS, SAVE_BLOG_FAIL],
     promise: client => client.post('/blogs', {
-      data: widget
+      data: blog
     })
   };
 }
@@ -142,4 +151,13 @@ export function editStart(id) {
 
 export function editStop(id) {
   return { type: EDIT_STOP, id };
+}
+
+export function isSlugExists(slug) {
+  return {
+    types: [IS_SLUG_EXISTS, IS_SLUG_EXISTS_SUCCESS, IS_SLUG_EXISTS_FAIL],
+    promise: client => client.get(`/blog/${slug}`, {
+      slug
+    })
+  };
 }
