@@ -3,45 +3,42 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import * as blogActions from 'redux/modules/blogs';
 import { asyncConnect } from 'redux-connect';
-import { BlogList } from 'components';
+import { BlogDetail } from 'components';
 
-const { isLoaded, load: loadBlogs } = blogActions;
+const { isLoaded, loadDetail: loadDetailBlogs } = blogActions;
 
 @asyncConnect([{
   deferred: true,
   promise: ({ store: { dispatch, getState } }) => {
     if (!isLoaded(getState())) {
-      return dispatch(loadBlogs());
+      return dispatch(loadDetailBlogs());
     }
   }
 }])
 @connect(
   state => ({
-    blogs: state.blogs.data,
-    load: PropTypes.func.isRequired,
-    loading: state.blogs.loading,
-    user: state.auth.user
+    blog: state.blogs.detail,
+    loadDetail: PropTypes.func.isRequired
   }),
   { ...blogActions })
 export default class Blogs extends Component {
   static propTypes = {
-    blogs: PropTypes.array,
-    user: PropTypes.object,
-    load: PropTypes.func.isRequired,
+    blog: PropTypes.array,
+    loadDetail: PropTypes.func.isRequired,
+    params: PropTypes.object
   };
 
   componentDidMount() {
-    this.props.load();
+    this.props.loadDetail(this.props.params.slug);
   }
-
   render() {
-    const { blogs, user } = this.props;
+    const { blog } = this.props;
     return (
       <div className="container">
         <div className="row">
-          <h3>Blog Posts</h3>
-          <Helmet title="Blog" />
-          {blogs.map(blog => <BlogList blog={blog} user={user} />)}
+          <h3>{blog.title}</h3>
+          <Helmet title={blog.title} />
+          <BlogDetail blog={blog} />
         </div>
       </div>
     );

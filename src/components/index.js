@@ -16,3 +16,4 @@ export RegisterForm from './RegisterForm/RegisterForm';
 export SurveyForm from './SurveyForm/SurveyForm';
 export WidgetForm from './WidgetForm/WidgetForm';
 export BlogList from './BlogList/BlogList';
+export BlogDetail from './BlogDetail/BlogDetail';

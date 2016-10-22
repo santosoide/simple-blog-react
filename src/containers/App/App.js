@@ -85,8 +85,8 @@ export default class App extends Component {
                 <NavItem>Chat with Feathers</NavItem>
               </LinkContainer>}
 
-              <LinkContainer to="/blogs">
-                <NavItem eventKey={1}>Blogs</NavItem>
+              <LinkContainer to="/blog">
+                <NavItem eventKey={1}>Blog</NavItem>
               </LinkContainer>
               <LinkContainer to="/widgets">
                 <NavItem eventKey={2}>Widgets</NavItem>

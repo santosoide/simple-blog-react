@@ -4,7 +4,7 @@ import { isLoaded as isAuthLoaded, load as loadAuth } from 'redux/modules/auth';
 import {
   App, Chat, ChatFeathers, Home, Widgets, About,
   Register, Login, LoginSuccess, Survey, NotFound,
-  Blogs
+  Blogs, Blog
 } from 'containers';
 
 export default store => {
@@ -54,7 +54,8 @@ export default store => {
       <Route path="survey" component={Survey} />
       <Route path="widgets" component={Widgets} />
       <Route path="chat" component={Chat} />
-      <Route path="blogs" component={Blogs} />
+      <Route path="blog" component={Blogs} />
+      <Route path="blog/:slug" component={Blog} />
 
       {/* Catch all route */}
       <Route path="*" component={NotFound} status={404} />
