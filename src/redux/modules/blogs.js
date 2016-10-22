@@ -13,8 +13,8 @@ const SAVE_FAIL = 'redux-example/blogs/SAVE_FAIL';
 const initialState = {
   loaded: false,
   editing: {},
-  data: [],
   detail: {},
+  data: [{"_id":"f8b1a7cb-8f60-4d96-b1ab-cd74fbd1a5a5","title":"Belajar Reactjs dan Redux","slug":"belajar-reactjs-dan-redux","body":"Ini adalah body untuk belajar reactjs dan redux","createdAt":{"$$date":1477058636933}}],
   saveError: {}
 };
 
