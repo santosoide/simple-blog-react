@@ -198,7 +198,7 @@ export function save(blog) {
 export function update(blog) {
   return {
     types: [UPDATE_BLOG, UPDATE_BLOG_SUCCESS, UPDATE_BLOG_FAIL],
-    promise: client => client.put(`/blogs/${blog._id}`, {
+    promise: client => client.patch(`/blogs/${blog._id}`, {
       data: blog
     })
   };
