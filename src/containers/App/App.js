@@ -127,6 +127,7 @@ export default class App extends Component {
         </div>
 
         <div className="well text-center">
+          <strong>Please Signin first and create new awesome post!</strong> {' '}
           Have questions? Ask for help{' '}
           <a href="https://github.com/cyberid41/simple-blog-react/issues" target="_blank">on Github</a>
         </div>
