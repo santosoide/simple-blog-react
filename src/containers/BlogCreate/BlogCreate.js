@@ -5,6 +5,7 @@ import { BlogCreateForm } from 'components';
 import * as blogActions from 'redux/modules/blogs';
 import * as notifActions from 'redux/modules/notifs';
 import { asyncConnect } from 'redux-connect';
+import { initialize } from 'redux-form';
 
 const { isLoaded, load: loadBlogs } = blogActions;
 
@@ -18,10 +19,11 @@ const { isLoaded, load: loadBlogs } = blogActions;
 }])
 @connect(
   () => ({}),
-  { ...notifActions, ...blogActions })
+  { ...notifActions, ...blogActions, initialize })
 export default class BlogCreate extends Component {
 
   static propTypes = {
+    initialize: PropTypes.func.isRequired,
     save: PropTypes.func.isRequired,
     notifSend: PropTypes.func,
     load: PropTypes.func.isRequired
@@ -33,6 +35,10 @@ export default class BlogCreate extends Component {
       message: 'Blog has been saved!',
       kind: 'success',
       dismissAfter: 2000
+    });
+    this.props.initialize('blog', {
+      title: '',
+      body: ''
     });
     return result;
   }

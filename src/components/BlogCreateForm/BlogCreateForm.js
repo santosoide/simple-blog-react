@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field, initialValues } from 'redux-form';
 import { connect } from 'react-redux';
 import blogValidation from './blogValidation';
 import { isSlugExists } from 'redux/modules/blogs';
@@ -13,11 +13,13 @@ function asyncValidate(data, dispatch) {
   form: 'blog',
   validate: blogValidation,
   asyncValidate,
-  asyncBlurFields: ['title']
+  asyncBlurFields: ['title'],
+  fields: ['title', 'body']
 })
 @connect(
   state => ({
-    active: state.form.blog.active
+    active: state.form.blog.active,
+    initialValues: state.blogs.blog
   })
 )
 export default
@@ -74,9 +76,9 @@ class BlogCreateForm extends Component {
       <div>
         <form className="form-horizontal" onSubmit={handleSubmit}>
           <Field name="title" type="text" component={this.renderInput} label="Title"
-            className="form-control" styles={styles} />
+            className="form-control" styles={styles} {...initialValues} />
           <Field name="body" type="text" component={this.renderTextarea} label="Body"
-            className="form-control" styles={styles} />
+            className="form-control" styles={styles} {...initialValues} />
           <div className="form-group">
             <div className="col-sm-offset-2 col-sm-10">
               <button className="btn btn-success" onClick={handleSubmit}>
