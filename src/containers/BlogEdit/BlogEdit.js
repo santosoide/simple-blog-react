@@ -23,7 +23,7 @@ const { isLoaded, load: loadBlogs, loadOne: loadOneBlog } = blogActions;
 }])
 @connect(
   state => ({
-    blog: state.blogs.blog,
+    blog: state.blogs.detail,
     loadOne: PropTypes.func.isRequired
   }),
   { ...notifActions, ...blogActions, initialize })
