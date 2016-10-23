@@ -168,7 +168,7 @@ export function isLoaded(globalState) {
 export function load() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: client => client.get('/blogs')
+    promise: client => client.get('/blogs?&$sort[createdAt]=-1')
   };
 }
 
