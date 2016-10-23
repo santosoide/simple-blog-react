@@ -5,7 +5,6 @@
  *
  */
 
-export CounterButton from './CounterButton/CounterButton';
 export FacebookLogin from './FacebookLogin/FacebookLogin';
 export GithubButton from './GithubButton/GithubButton';
 export InfoBar from './InfoBar/InfoBar';
@@ -13,8 +12,6 @@ export LoginForm from './LoginForm/LoginForm';
 export MiniInfoBar from './MiniInfoBar/MiniInfoBar';
 export Notifs from './Notifs/Notifs';
 export RegisterForm from './RegisterForm/RegisterForm';
-export SurveyForm from './SurveyForm/SurveyForm';
-export WidgetForm from './WidgetForm/WidgetForm';
 export BlogList from './BlogList/BlogList';
 export BlogDetail from './BlogDetail/BlogDetail';
 export BlogCreateForm from './BlogCreateForm/BlogCreateForm';

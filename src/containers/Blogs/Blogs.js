@@ -38,7 +38,7 @@ export default class Blogs extends Component {
       <div className="container">
         <div className="row">
           <h3>Blog Posts</h3>
-          <Helmet title="Blog" />
+          <Helmet title="Home" />
           {blogs.map(blog => <BlogList blog={blog} />)}
         </div>
       </div>
