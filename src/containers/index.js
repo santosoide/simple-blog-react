@@ -12,3 +12,4 @@ export Widgets from './Widgets/Widgets';
 export Blogs from './Blogs/Blogs';
 export Blog from './Blog/Blog';
 export BlogCreate from './BlogCreate/BlogCreate';
+export BlogEdit from './BlogEdit/BlogEdit';
