@@ -36,11 +36,12 @@ export default class Blog extends Component {
   }
   render() {
     const { blog, user } = this.props;
+    const baseUrl = '/blog';
     return (
       <div className="container">
         <div className="row">
           <h3>
-            {blog.title}{user && <Link className="btn btn-link" type="button" to={`blog/${blog._id}/edit`}>
+            {blog.title}{user && <Link className="btn btn-link" type="button" to={`${baseUrl}/${blog._id}/edit`}>
             Edit</Link>}
           </h3>
           <Helmet title={blog.title} />

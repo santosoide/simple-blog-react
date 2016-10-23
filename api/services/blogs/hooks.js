@@ -11,7 +11,7 @@ const schemaValidator = {
 };
 
 const options = {
-  service: 'users',
+  service: 'blogs',
   field: 'sentBy'
 };
 
@@ -34,15 +34,27 @@ const blogsHooks = {
         hook.data.createdAt = new Date();
       }
     ],
-    update: [hooks.disable()],
-    patch: [hooks.disable()],
-    remove: [hooks.disable()]
+    update: [
+      validate(schemaValidator),
+      hook => {
+        hook.data = {
+          title: hook.data.title,
+          slug: dashify(hook.data.title),
+          body: hook.data.body
+        };
+      },
+      hook => {
+        hook.data.updatedAt = new Date();
+      }
+    ],
+    patch: [],
+    remove: []
   },
   after: {
     all: [],
-    find: [hooks.populate('sentBy', options), hooks.remove('sentBy.password')],
-    get: [hooks.populate('sentBy', options), hooks.remove('sentBy.password')],
-    create: [hooks.populate('sentBy', options), hooks.remove('sentBy.password')],
+    find: [],
+    get: [],
+    create: [],
     update: [],
     patch: [],
     remove: []

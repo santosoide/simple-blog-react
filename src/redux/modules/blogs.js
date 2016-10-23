@@ -12,12 +12,19 @@ const SAVE_BLOG_FAIL = 'redux-example/blogs/SAVE_BLOG_FAIL';
 const IS_SLUG_EXISTS = 'redux-example/blogs/IS_SLUG_EXISTS';
 const IS_SLUG_EXISTS_SUCCESS = 'redux-example/blogs/IS_SLUG_EXISTS_SUCCESS';
 const IS_SLUG_EXISTS_FAIL = 'redux-example/blogs/IS_SLUG_EXISTS_FAIL';
+const LOAD_ONE = 'redux-example/blogs/LOAD_ONE';
+const LOAD_ONE_SUCCESS = 'redux-example/blogs/LOAD_ONE_SUCCESS';
+const LOAD_ONE_FAIL = 'redux-example/blogs/LOAD_ONE_FAIL';
+const UPDATE_BLOG = 'redux-example/blogs/UPDATE_BLOG';
+const UPDATE_BLOG_SUCCESS = 'redux-example/blogs/UPDATE_BLOG_SUCCESS';
+const UPDATE_BLOG_FAIL = 'redux-example/blogs/UPDATE_BLOG_FAIL';
 
 const initialState = {
   loaded: false,
   editing: {},
   detail: {},
   data: [],
+  blog: {},
   saveError: {}
 };
 
@@ -26,7 +33,7 @@ export default function reducer(state = initialState, action = {}) {
     case LOAD:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
     case LOAD_SUCCESS:
       return {
@@ -62,7 +69,28 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: false,
-        data: null,
+        blog: null,
+        error: typeof action.error === 'string' ? action.error : 'Error'
+      };
+    case LOAD_ONE:
+      return {
+        ...state,
+        loading: true
+      };
+    case LOAD_ONE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        blog: action.result,
+        error: null
+      };
+    case LOAD_ONE_FAIL:
+      return {
+        ...state,
+        loading: false,
+        loaded: false,
+        blog: null,
         error: typeof action.error === 'string' ? action.error : 'Error'
       };
     case EDIT_START:
@@ -89,6 +117,21 @@ export default function reducer(state = initialState, action = {}) {
         data: action.result
       };
     case SAVE_BLOG_FAIL:
+      return typeof action.error === 'string' ? {
+        ...state,
+        saveError: {
+          ...state.saveError,
+          [action.id]: action.error
+        }
+      } : state;
+    case UPDATE_BLOG:
+      return state;
+    case UPDATE_BLOG_SUCCESS:
+      return {
+        ...state,
+        data: action.result
+      };
+    case UPDATE_BLOG_FAIL:
       return typeof action.error === 'string' ? {
         ...state,
         saveError: {
@@ -136,10 +179,26 @@ export function loadDetail(slug) {
   };
 }
 
+export function loadOne(_id) {
+  return {
+    types: [LOAD_ONE, LOAD_ONE_SUCCESS, LOAD_ONE_FAIL],
+    promise: client => client.get(`/blogs/${_id}`)
+  };
+}
+
 export function save(blog) {
   return {
     types: [SAVE_BLOG, SAVE_BLOG_SUCCESS, SAVE_BLOG_FAIL],
     promise: client => client.post('/blogs', {
+      data: blog
+    })
+  };
+}
+
+export function update(blog) {
+  return {
+    types: [UPDATE_BLOG, UPDATE_BLOG_SUCCESS, UPDATE_BLOG_FAIL],
+    promise: client => client.put(`/blogs/${blog._id}`, {
       data: blog
     })
   };

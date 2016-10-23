@@ -19,14 +19,12 @@ const { isLoaded, load: loadBlogs } = blogActions;
   state => ({
     blogs: state.blogs.data,
     load: PropTypes.func.isRequired,
-    loading: state.blogs.loading,
-    user: state.auth.user
+    loading: state.blogs.loading
   }),
   { ...blogActions })
 export default class Blogs extends Component {
   static propTypes = {
     blogs: PropTypes.array,
-    user: PropTypes.object,
     load: PropTypes.func.isRequired,
   };
 
@@ -35,13 +33,13 @@ export default class Blogs extends Component {
   }
 
   render() {
-    const { blogs, user } = this.props;
+    const { blogs } = this.props;
     return (
       <div className="container">
         <div className="row">
           <h3>Blog Posts</h3>
           <Helmet title="Blog" />
-          {blogs.map(blog => <BlogList blog={blog} user={user} />)}
+          {blogs.map(blog => <BlogList blog={blog} />)}
         </div>
       </div>
     );
