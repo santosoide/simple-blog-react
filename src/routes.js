@@ -2,8 +2,7 @@ import React from 'react';
 import { IndexRoute, Route } from 'react-router';
 import { isLoaded as isAuthLoaded, load as loadAuth } from 'redux/modules/auth';
 import {
-  App, Chat, ChatFeathers, Home, Widgets, About,
-  Register, Login, LoginSuccess, Survey, NotFound,
+  App, About, Register, Login, LoginSuccess, NotFound,
   Blogs, Blog, BlogEdit, BlogCreate
 } from 'containers';
 
@@ -35,12 +34,11 @@ export default store => {
   return (
     <Route path="/" component={App}>
       {/* Home (main) route */}
-      <IndexRoute component={Home} />
+      <IndexRoute component={Blogs} />
 
       {/* Routes requiring login */}
       <Route onEnter={requireLogin}>
         <Route path="loginSuccess" component={LoginSuccess} />
-        <Route path="chatFeathers" component={ChatFeathers} />
         <Route path="blog/:_id/edit" component={BlogEdit} />
         <Route path="blog/create" component={BlogCreate} />
       </Route>
@@ -53,9 +51,6 @@ export default store => {
       {/* Routes */}
       <Route path="login" component={Login} />
       <Route path="about" component={About} />
-      <Route path="survey" component={Survey} />
-      <Route path="widgets" component={Widgets} />
-      <Route path="chat" component={Chat} />
       <Route path="blog" component={Blogs} />
       <Route path="blog/:slug" component={Blog} />
 

@@ -81,21 +81,8 @@ export default class App extends Component {
 
           <Navbar.Collapse eventKey={0}>
             <Nav navbar>
-              {user && <LinkContainer to="/chatFeathers">
-                <NavItem>Chat with Feathers</NavItem>
-              </LinkContainer>}
-
-              <LinkContainer to="/blog">
-                <NavItem eventKey={1}>Blog</NavItem>
-              </LinkContainer>
-              <LinkContainer to="/widgets">
-                <NavItem eventKey={2}>Widgets</NavItem>
-              </LinkContainer>
-              <LinkContainer to="/survey">
-                <NavItem eventKey={3}>Survey</NavItem>
-              </LinkContainer>
               <LinkContainer to="/about">
-                <NavItem eventKey={4}>About Us</NavItem>
+                <NavItem eventKey={1}>About Us</NavItem>
               </LinkContainer>
 
               {user && <LinkContainer to="/blog/create">
@@ -103,13 +90,13 @@ export default class App extends Component {
               </LinkContainer>}
 
               {!user && <LinkContainer to="/login">
-                <NavItem eventKey={5}>Login</NavItem>
+                <NavItem eventKey={2}>Login</NavItem>
               </LinkContainer>}
               {!user && <LinkContainer to="/register">
-                <NavItem eventKey={6}>Register</NavItem>
+                <NavItem eventKey={3}>Register</NavItem>
               </LinkContainer>}
               {user && <LinkContainer to="/logout">
-                <NavItem eventKey={7} className="logout-link" onClick={this.handleLogout}>
+                <NavItem eventKey={4} className="logout-link" onClick={this.handleLogout}>
                   Logout
                 </NavItem>
               </LinkContainer>}
@@ -120,7 +107,7 @@ export default class App extends Component {
             <Nav navbar pullRight>
               <NavItem
                 eventKey={1} target="_blank" title="View on Github"
-                href="https://github.com/erikras/react-redux-universal-hot-example">
+                href="https://github.com/cyberid41/simple-blog-react">
                 <i className="fa fa-github" />
               </NavItem>
             </Nav>
@@ -141,10 +128,7 @@ export default class App extends Component {
 
         <div className="well text-center">
           Have questions? Ask for help{' '}
-          <a href="https://github.com/erikras/react-redux-universal-hot-example/issues" target="_blank">on Github</a>
-          {' '}or in the{' '}
-          <a href="https://discord.gg/0ZcbPKXt5bZZb1Ko" target="_blank">#react-redux-universal</a>
-          {' '}Discord channel.
+          <a href="https://github.com/cyberid41/simple-blog-react/issues" target="_blank">on Github</a>
         </div>
       </div>
     );
