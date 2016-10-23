@@ -25,7 +25,7 @@ const { isLoaded, loadDetail: loadDetailBlogs } = blogActions;
   { ...blogActions })
 export default class Blog extends Component {
   static propTypes = {
-    blog: PropTypes.array,
+    blog: PropTypes.object,
     loadDetail: PropTypes.func.isRequired,
     user: PropTypes.object,
     params: PropTypes.object
